@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PCBootActivity">
+
+    <ImageView
+        android:id="@+id/bootInstruction_imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bootInstruction_textView2"
+        app:srcCompat="@drawable/pc_powered_on_booting" />
+
+    <TextView
+        android:id="@+id/bootInstruction_textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Check if the Yellow Status Indicator is blinking"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/bootInstruction_textView"
+        app:layout_constraintTop_toBottomOf="@+id/bootInstructionHint_textView" />
+
+    <Button
+        android:id="@+id/bootInstruction_noButton"
+        android:layout_width="124dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2196F3"
+        android:foregroundTint="#4458C6"
+        android:text="No (20)"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/bootInstruction_imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/bootInstructionHint_textView2" />
+
+    <Button
+        android:id="@+id/bootInstruction_yesButton"
+        android:layout_width="120dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#2196F3"
+        android:foregroundTint="#4458C6"
+        android:text="Yes"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/bootInstruction_noButton"
+        app:layout_constraintTop_toTopOf="@+id/bootInstruction_noButton" />
+
+    <TextView
+        android:id="@+id/bootInstructionHint_textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Yellow indicator is shown in the left side of above image"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bootInstruction_imageView2" />
+
+    <ImageView
+        android:id="@+id/bootInstruction_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bootInstruction_textView"
+        app:srcCompat="@drawable/pc_powered_off" />
+
+    <TextView
+        android:id="@+id/bootInstruction_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Press Power Button to turn on Primary Robot Computer"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/bootInstructionHint_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Computer Power button is on the left side of the robot"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bootInstruction_imageView" />
+
+    <Button
+        android:id="@+id/bootInstruction_nextButton"
+        android:layout_width="124dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2196F3"
+        android:foregroundTint="#4458C6"
+        android:text="Next"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/bootInstruction_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/bootInstructionHint_textView" />
+
+    <TextView
+        android:id="@+id/console_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="Console"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

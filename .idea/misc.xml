@@ -5,7 +5,10 @@
       <map>
         <entry key="..\:/Workspace/Android/RobotInterface/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Workspace/Android/RobotInterface/app/src/main/res/layout/activity_main_bak.xml" value="0.19427083333333334" />
+        <entry key="..\:/Workspace/Android/RobotInterface/app/src/main/res/layout/activity_pcboot.xml" value="0.33" />
         <entry key="..\:/Workspace/Android/RobotInterface/app/src/main/res/layout/activity_robot_control.xml" value="0.33" />
+        <entry key="..\:/Workspace/Android/RobotInterface/app/src/main/res/layout/activity_robot_initial_pose.xml" value="0.2" />
+        <entry key="..\:/Workspace/Android/RobotInterface/app/src/main/res/layout/activity_startup.xml" value="0.17916666666666667" />
         <entry key="..\:/Workspace/Android/RobotInterface/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.4088541666666667" />
       </map>
     </option>

@@ -103,7 +103,7 @@ public class RobotControl extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int which) {
                         if (mqttHandler != null) {
-                            mqttHandler.sendMessage("{command:shutdown}", "robot_depart");
+                            mqttHandler.sendMessage("{\"command\":\"shutdown\"}", "robot_depart");
                         }
                         Log.i(TAG, "Power Off Robot");
                         dialog.dismiss();
@@ -127,7 +127,7 @@ public class RobotControl extends AppCompatActivity {
         gripperReleaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mqttHandler.sendMessage("{command:gripper_extended_release}", "robot_depart");
+                mqttHandler.sendMessage("{\"command\":\"gripper_extended_release\"}", "robot_depart");
                 Log.i(TAG, "Release Gripper");
             }
         });

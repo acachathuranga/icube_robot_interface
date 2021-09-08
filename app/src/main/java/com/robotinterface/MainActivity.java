@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-        final MqttHandler mqttHandler = new MqttHandler(getApplicationContext(), "tcp://10.0.2.2:1883", "tablet", "obstacle_proximity", mqttHandlerCallback);
-        //MqttHandler mqttHandler = new MqttHandler(getApplicationContext(), "tcp://192.168.2.127:1883", "tablet", "obstacle_proximity", mqttHandlerCallback);
+        //final MqttHandler mqttHandler = new MqttHandler(getApplicationContext(), "tcp://10.0.2.2:1883", "tablet", "obstacle_proximity", mqttHandlerCallback);
+        final MqttHandler mqttHandler = new MqttHandler(getApplicationContext(), getResources().getString(R.string.robot_ip), "obstacle_display", "obstacle_proximity", mqttHandlerCallback);
 
         // I2R Communication
         RobotCommunication.CallbackEvent i2rMqttHandlerCallback = new RobotCommunication.CallbackEvent() {
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-        final MqttHandler i2rMqttHandler = new MqttHandler(getApplicationContext(), "tcp://10.0.2.2:1883", "tablet2", "robot_status", i2rMqttHandlerCallback);
-        //MqttHandler i2rMqttHandler = new MqttHandler(getApplicationContext(), "tcp://192.168.2.127:1883", "tablet2", "robot_status", i2rMqttHandlerCallback);
+        //final MqttHandler i2rMqttHandler = new MqttHandler(getApplicationContext(), "tcp://10.0.2.2:1883", "tablet2", "robot_status", i2rMqttHandlerCallback);
+        final MqttHandler i2rMqttHandler = new MqttHandler(getApplicationContext(), "tcp://192.168.2.127:1883", "tablet_control", "robot_status", i2rMqttHandlerCallback);
 
 
 

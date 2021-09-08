@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">RobotInterface</string>
+    <!--string name="robot_ip">tcp://192.168.2.127:1883</string-->
+
+    <!-- Communication Between GUI and Robot for Status monitoring and control-->
+    <string name="robot_ip">tcp://10.0.2.2:1883</string>
+
+    <string name="mqtt_command_topic">robot_command</string>
+    <string name="robot_command_field">command</string>
+    <string name="robot_command_GripperRelease">gripper_release</string>
+    <string name="robot_command_Shutdown">shutdown</string>
+    <string name="robot_command_DockToCharger">dock</string>
+    <string name="robot_command_StartSelfTest">self_test</string>
+
+    <string name="mqtt_robot_topic">status</string>
+    <string name="mqtt_robot_name_field">robot_name</string>
+    <string name="mqtt_robot_status_field">robot_status</string>
+    <string name="mqtt_robot_self_test_status_field">self_test_status</string>
+    <string name="mqtt_robot_obstacle_detection_field">obstacle_detection</string>
+    <string name="mqtt_robot_obstacle_detection_ok_value">clear</string>
+    <string name="mqtt_robot_obstacle_detection_warn_value">near_collision</string>
+    <string name="mqtt_robot_obstacle_detection_critical_value">imminent_collision</string>
+    <string name="mqtt_robot_obstacle_detection_disabled_value">safety_off</string>
+
 </resources>
