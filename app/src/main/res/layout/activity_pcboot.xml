@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bootInstruction_textView2"
-        app:srcCompat="@drawable/pc_powered_on_booting" />
+        app:srcCompat="@drawable/pc_powered_on" />
 
     <TextView
         android:id="@+id/bootInstruction_textView2"
@@ -118,5 +118,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/bootInstruction_imageView3"
+        android:layout_width="20dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="35dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/bootInstruction_imageView2"
+        app:layout_constraintStart_toStartOf="@+id/bootInstruction_imageView2"
+        app:layout_constraintTop_toTopOf="@+id/bootInstruction_imageView2"
+        app:srcCompat="@drawable/disk" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,19 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RobotInterface">
-        <!--activity
+        <activity
             android:name=".RobotInitialPoseActivity"
-            android:exported="true" /-->
-        <!--
-        activity
+            android:exported="true" />
+        <activity
             android:name=".PCBootActivity"
-            android:exported="true" /
-        -->
-        <!--
-        activity
+            android:exported="true" />
+        <!--activity
             android:name=".StartupActivity"
-            android:exported="true" /
-        -->
+            android:exported="true" /-->
         <activity
             android:name=".RobotControl"
             android:exported="true" />

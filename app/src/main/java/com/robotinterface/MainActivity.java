@@ -11,90 +11,90 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONObject;
-
 
 public class MainActivity extends AppCompatActivity {
+    RobotAdaptor robot;
+    RobotAdaptor.RobotCallback callback;
+    TextView console;
+    String TAG = "Main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView text = (TextView) findViewById(R.id.label);
+        console = (TextView) findViewById(R.id.label);
         ImageView imageView = (ImageView) findViewById(R.id.mouthView);
 
         Avatar avatar = new EmojiFace(this);
 
-        // ROS Communication
-        RobotCommunication.CallbackEvent mqttHandlerCallback = new RobotCommunication.CallbackEvent() {
+        try {
+            final Object robotAdaptor = ((ObjectWrapperForBinder)getIntent().getExtras().getBinder("robotAdaptor")).getData();
+            robot = (RobotAdaptor) robotAdaptor;
+        } catch (Exception ex) {
+            robot = new RobotAdaptor(getApplicationContext());
+            onLogEvent(ex.getMessage());
+        }
+
+        // Replace robot callbacks with activity methods
+        callback = new RobotAdaptor.RobotCallback() {
             @Override
-            public void onLogEvent(String msg) {
-                text.setText(msg);
+            public void onLogEvent(String logMsg) {
+                MainActivity.this.onLogEvent(logMsg);
             }
 
             @Override
-            public void onMessageReceivedEvent(String msg, String sender) {
-                Log.i("Main", "onMessageReceivedEvent: ROS");
-                text.setText("msg: " + msg + " from: " + sender);
-                if (msg.equalsIgnoreCase("safety_off")) {
-                    avatar.setMood(Avatar.MOOD.Angry);
-                } else if (msg.equalsIgnoreCase("clear")) {
-                    avatar.setMood(Avatar.MOOD.Happy);
-                } else if (msg.equalsIgnoreCase("imminent_collision")) {
-                    avatar.setMood(Avatar.MOOD.Sad);
-                } else if (msg.equalsIgnoreCase("near_collision")) {
-                    avatar.setMood(Avatar.MOOD.Nervous);
+            public void onRobotStatusCallback(RobotAdaptor.STATUS status) {
+                MainActivity.this.onLogEvent("RobotStatus: " + status.name());
+                if (status == RobotAdaptor.STATUS.Error) {
+                    WebView webView = (WebView) findViewById(R.id.webView);
+                    webView.setWebViewClient(new WebViewController());
+                    webView.loadDataWithBaseURL("file:///android_asset/","<html><center><img src=\"on_fire.gif\"></html>","text/html","utf-8","");
                 } else {
-                    avatar.setMood(Avatar.MOOD.Angry);
+                    WebView webView = (WebView) findViewById(R.id.webView);
+                    webView.loadUrl("about:blank");
                 }
-            }
-        };
-        //final MqttHandler mqttHandler = new MqttHandler(getApplicationContext(), "tcp://10.0.2.2:1883", "tablet", "obstacle_proximity", mqttHandlerCallback);
-        final MqttHandler mqttHandler = new MqttHandler(getApplicationContext(), getResources().getString(R.string.robot_ip), "obstacle_display", "obstacle_proximity", mqttHandlerCallback);
-
-        // I2R Communication
-        RobotCommunication.CallbackEvent i2rMqttHandlerCallback = new RobotCommunication.CallbackEvent() {
-            @Override
-            public void onLogEvent(String msg) {
-                text.setText(msg);
             }
 
             @Override
-            public void onMessageReceivedEvent(String msg, String sender) {
-                text.setText("msg: " + msg + " from: " + sender);
-                Log.i("Main", "onMessageReceivedEvent: I2R");
-                try {
-                    JSONObject jObject = new JSONObject(msg);
-                    String robot_status = jObject.getString("status");
-
-                    if (robot_status.equalsIgnoreCase("error")) {
-                        WebView webView = (WebView) findViewById(R.id.webView);
-                        webView.setWebViewClient(new WebViewController());
-                        webView.loadDataWithBaseURL("file:///android_asset/","<html><center><img src=\"on_fire.gif\"></html>","text/html","utf-8","");
-                    } else {
-                        WebView webView = (WebView) findViewById(R.id.webView);
-                        webView.loadUrl("about:blank");
-                    }
-                } catch (Exception ex) {
-                    text.setText("Cannot decode JSON from: " + sender + "[" + msg + "]  Reason: " + ex.getMessage());
+            public void onRobotObstacleDetectionCallback(RobotAdaptor.OBSTACLE_DETECTION state) {
+                MainActivity.this.onLogEvent("ObstacleDetection: " + state.name());
+                switch (state) {
+                    case Ok: avatar.setMood(Avatar.MOOD.Happy); break;
+                    case Warning: avatar.setMood(Avatar.MOOD.Nervous); break;
+                    case Critical: avatar.setMood(Avatar.MOOD.Sad); break;
+                    default: avatar.setMood(Avatar.MOOD.Angry); break;
                 }
             }
         };
-        //final MqttHandler i2rMqttHandler = new MqttHandler(getApplicationContext(), "tcp://10.0.2.2:1883", "tablet2", "robot_status", i2rMqttHandlerCallback);
-        final MqttHandler i2rMqttHandler = new MqttHandler(getApplicationContext(), "tcp://192.168.2.127:1883", "tablet_control", "robot_status", i2rMqttHandlerCallback);
-
-
+        robot.setRobotCallback(callback);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent startRobotControl = new Intent(getApplicationContext(), RobotControl.class);
                 final Bundle bundle = new Bundle();
-                bundle.putBinder("mqttHandler", new ObjectWrapperForBinder(i2rMqttHandler));
+                bundle.putBinder("robotAdaptor", new ObjectWrapperForBinder(robot));
                 startRobotControl.putExtras(bundle);
                 startActivity(startRobotControl);
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        robot.setRobotCallback(callback);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        robot.setRobotCallback(callback);
+    }
+
+    private void onLogEvent(String logMsg) {
+        console.setText(TAG + ": " + logMsg);
+        Log.i(TAG, logMsg);
     }
 
     private class WebViewController extends WebViewClient {

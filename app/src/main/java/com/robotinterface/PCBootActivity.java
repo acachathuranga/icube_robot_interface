@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class PCBootActivity extends AppCompatActivity {
     ImageView powerOnImageView;
     ImageView pcActivityImageView;
+    ImageView pcActivityIndicatorImageView;
     Button powerOnNextButton;
     Button pcActivityYesButton;
     Button pcActivityNoButton;
@@ -80,6 +83,7 @@ public class PCBootActivity extends AppCompatActivity {
     void initUI() {
         powerOnImageView = (ImageView) findViewById(R.id.bootInstruction_imageView);
         pcActivityImageView = (ImageView) findViewById(R.id.bootInstruction_imageView2);
+        pcActivityIndicatorImageView = (ImageView) findViewById(R.id.bootInstruction_imageView3);
         powerOnNextButton = (Button) findViewById(R.id.bootInstruction_nextButton);
         pcActivityYesButton = (Button) findViewById(R.id.bootInstruction_yesButton);
         pcActivityNoButton = (Button) findViewById(R.id.bootInstruction_noButton);
@@ -94,12 +98,12 @@ public class PCBootActivity extends AppCompatActivity {
         pcActivityHintTextView.setVisibility(View.INVISIBLE);
         pcActivityYesButton.setVisibility(View.INVISIBLE);
         pcActivityNoButton.setVisibility(View.INVISIBLE);
-        pcActivityNoButton.setClickable(false);
-        pcActivityNoButton.setAlpha(0.5f);
+        pcActivityIndicatorImageView.clearAnimation();
+        pcActivityIndicatorImageView.setVisibility(View.INVISIBLE);
 
         // Set Data
         powerOnImageView.setImageResource(getApplicationContext().getResources().getIdentifier("@drawable/pc_powered_off", null, getApplicationContext().getPackageName()));
-        pcActivityImageView.setImageResource(getApplicationContext().getResources().getIdentifier("@drawable/pc_powered_on_booting", null, getApplicationContext().getPackageName()));
+        pcActivityImageView.setImageResource(getApplicationContext().getResources().getIdentifier("@drawable/pc_powered_on", null, getApplicationContext().getPackageName()));
 
         // Configure Dialog Box
         bootProgressDialog = new ProgressDialog(PCBootActivity.this);
@@ -120,6 +124,18 @@ public class PCBootActivity extends AppCompatActivity {
                 pcActivityHintTextView.setVisibility(View.VISIBLE);
                 pcActivityYesButton.setVisibility(View.VISIBLE);
                 pcActivityNoButton.setVisibility(View.VISIBLE);
+                pcActivityIndicatorImageView.setVisibility(View.VISIBLE);
+                // Configure buttons
+                pcActivityNoButton.setClickable(false);
+                pcActivityNoButton.setAlpha(0.5f);
+
+                // Animate light blinking
+                Animation blink = new AlphaAnimation(0.0f, 1.0f);
+                blink.setDuration(1000); //You can manage the blinking time with this parameter
+                blink.setStartOffset(20);
+                blink.setRepeatMode(Animation.REVERSE);
+                blink.setRepeatCount(Animation.INFINITE);
+                pcActivityIndicatorImageView.startAnimation(blink);
 
                 new CountDownTimer(timeOutValue, 1000L) {
 

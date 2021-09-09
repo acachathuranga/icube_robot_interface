@@ -31,12 +31,12 @@ public class RobotInitialPoseActivity extends AppCompatActivity {
             RobotAdaptor.RobotCallback callback = new RobotAdaptor.RobotCallback() {
                 @Override
                 public void onLogEvent(String logMsg) {
-                    onLogEvent(logMsg);
+                    RobotInitialPoseActivity.this.onLogEvent(logMsg);
                 }
 
                 @Override
                 public void onRobotStatusCallback(RobotAdaptor.STATUS status) {
-                    onRobotStatusCallback(status);
+                    RobotInitialPoseActivity.this.onRobotStatusCallback(status);
                 }
 
                 @Override
@@ -45,6 +45,7 @@ public class RobotInitialPoseActivity extends AppCompatActivity {
                 }
             };
             robot.setRobotCallback(callback);
+            RobotInitialPoseActivity.this.onLogEvent("Callback Registered");
 
         } catch (Exception ex) {
             dockButton.setClickable(false);

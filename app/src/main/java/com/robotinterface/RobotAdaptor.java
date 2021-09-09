@@ -38,6 +38,7 @@ public class RobotAdaptor extends AppCompatActivity {
     RobotCallback robotCallback = null;
 
     STATUS robotStatus;
+    OBSTACLE_DETECTION obstacleStatus;
     boolean selfTestPassed;
 
     long watchdogTimeout = 13000L;
@@ -48,6 +49,7 @@ public class RobotAdaptor extends AppCompatActivity {
     RobotAdaptor(Context context){
         // Initialize states
         robotStatus = STATUS.Disconnected;
+        obstacleStatus = OBSTACLE_DETECTION.Ok;
         selfTestPassed = false;
         resources = context.getResources();
 
@@ -160,16 +162,17 @@ public class RobotAdaptor extends AppCompatActivity {
 
     private void onObstacleDetectionCallback (String obstacle) {
         if (obstacle.equalsIgnoreCase(resources.getString(R.string.mqtt_robot_obstacle_detection_ok_value))) {
-            onObstacleDetectionCallback(OBSTACLE_DETECTION.Ok);
+            obstacleStatus = OBSTACLE_DETECTION.Ok;
         } else if (obstacle.equalsIgnoreCase(resources.getString(R.string.mqtt_robot_obstacle_detection_warn_value))) {
-            onObstacleDetectionCallback(OBSTACLE_DETECTION.Warning);
+            obstacleStatus = OBSTACLE_DETECTION.Warning;
         } else if (obstacle.equalsIgnoreCase(resources.getString(R.string.mqtt_robot_obstacle_detection_critical_value))) {
-            onObstacleDetectionCallback(OBSTACLE_DETECTION.Critical);
+            obstacleStatus = OBSTACLE_DETECTION.Critical;
         } else if (obstacle.equalsIgnoreCase(resources.getString(R.string.mqtt_robot_obstacle_detection_disabled_value))) {
-            onObstacleDetectionCallback(OBSTACLE_DETECTION.Disabled);
+            obstacleStatus = OBSTACLE_DETECTION.Disabled;
         } else {
-            onObstacleDetectionCallback(OBSTACLE_DETECTION.Disabled);
+            obstacleStatus = OBSTACLE_DETECTION.Disabled;
         }
+        onObstacleDetectionCallback(obstacleStatus);
     }
 
     private void onRobotStatusCallback(STATUS status) {
@@ -200,6 +203,12 @@ public class RobotAdaptor extends AppCompatActivity {
 
         // Send current robot status at callback registering time
         onRobotStatusCallback(robotStatus);
+        // Send current obstacle status at callback registering time
+        onObstacleDetectionCallback(obstacleStatus);
+    }
+
+    public void removeRobotCallback() {
+        this.robotCallback = null;
     }
 
     public STATUS getRobotStatus() {
