@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">RobotInterface</string>
-    <!--string name="robot_ip">tcp://192.168.2.127:1883</string-->
 
     <!-- Communication Between GUI and Robot for Status monitoring and control-->
-    <string name="robot_ip">tcp://10.0.2.2:1883</string>
+    <!--string name="robot_ip">tcp://10.0.2.2:1883</string-->
+    <string name="robot_ip">tcp://192.168.2.127:1883</string>
 
     <string name="mqtt_command_topic">robot_command</string>
     <string name="robot_command_field">command</string>
