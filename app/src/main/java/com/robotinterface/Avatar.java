@@ -5,7 +5,9 @@ public interface Avatar {
         Happy,
         Nervous,
         Angry,
-        Sad
+        Sleepy,
+        Sad,
+        Dead
     };
     public void setMood(MOOD mood);
 }

@@ -84,6 +84,17 @@ public class EmojiFace implements Avatar {
                 setImage(faceView, "@drawable/sad_face");
                 setImage(eyesView,"@drawable/sad_eyes");
                 setImage(mouthView, "@drawable/sad_mouth");
+                break;
+            case Sleepy:
+                setImage(faceView, "@drawable/sleepy_face");
+                setImage(eyesView, "@drawable/sleepy_eyes");
+                setImage(mouthView, "@drawable/empty");
+                break;
+            case Dead:
+                setImage(faceView, "@drawable/dead_face");
+                setImage(eyesView, "@drawable/empty");
+                setImage(mouthView, "@drawable/empty");
+                break;
             default:
         }
     }
