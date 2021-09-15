@@ -74,7 +74,7 @@ public class RobotInitialPoseActivity extends AppCompatActivity {
     }
 
     private void onRobotStatusCallback(RobotAdaptor.STATUS status){
-        if (status == RobotAdaptor.STATUS.Ok){
+        if (status != RobotAdaptor.STATUS.Disconnected){
             dockButton.setClickable(true);
             dockButton.setAlpha(1f);
         } else
