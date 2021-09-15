@@ -53,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
                     WebView webView = (WebView) findViewById(R.id.webView);
                     webView.loadUrl("about:blank");
                 }
+                Log.i("MainPrint", status.name());
+                if (status == RobotAdaptor.STATUS.Disabled) {
+                    avatar.setMood(Avatar.MOOD.Sleepy);
+                } else if (status == RobotAdaptor.STATUS.Disconnected) {
+                    avatar.setMood(Avatar.MOOD.Dead);
+                } else {
+                    avatar.setMood(Avatar.MOOD.Happy);
+                }
+
+
             }
 
             @Override
