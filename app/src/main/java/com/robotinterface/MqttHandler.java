@@ -102,6 +102,7 @@ public class MqttHandler implements RobotCommunication {
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     log("Mqtt Connection failed: " + exception.getMessage());
+                    reconnect();
                 }
             });
 
