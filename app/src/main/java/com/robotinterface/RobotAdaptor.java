@@ -15,6 +15,7 @@ public class RobotAdaptor extends AppCompatActivity {
     enum STATUS {
         Ok,
         Busy,
+        Disabled,
         Error,
         Disconnected
     };
@@ -183,18 +184,25 @@ public class RobotAdaptor extends AppCompatActivity {
 
     private void onRobotStatusCallback(String status)
     {
+        // Robot State received. If previous state is different, report update
         if (status.equalsIgnoreCase("error")) {
-            robotStatus = STATUS.Error;
-            onRobotStatusCallback(robotStatus);
-        } else {
-            // Robot State received. If previous state is different, report update
-            if ((status.equalsIgnoreCase("busy") && robotStatus != STATUS.Busy)) {
-                robotStatus = STATUS.Busy;
-                onRobotStatusCallback(robotStatus);
-            } else if (robotStatus != STATUS.Ok) {
-                robotStatus = STATUS.Ok;
+            if (robotStatus != STATUS.Error) {
+                robotStatus = STATUS.Error;
                 onRobotStatusCallback(robotStatus);
             }
+        } else if (status.equalsIgnoreCase("busy")) {
+            if (robotStatus != STATUS.Busy) {
+                robotStatus = STATUS.Busy;
+                onRobotStatusCallback(robotStatus);
+            }
+        } else if (status.equalsIgnoreCase("disabled")) {
+            if (robotStatus != STATUS.Disabled) {
+                robotStatus = STATUS.Disabled;
+                onRobotStatusCallback(robotStatus);
+            }
+        } else if (robotStatus != STATUS.Ok) {
+            robotStatus = STATUS.Ok;
+            onRobotStatusCallback(robotStatus);
         }
     }
 
