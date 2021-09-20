@@ -76,9 +76,9 @@ public class EmojiFace implements Avatar {
                 setImage(mouthView, "@drawable/nervous_mouth");
                 break;
             case Angry:
-                setImage(faceView, "@drawable/angry_face");
-                setImage(eyesView, "@drawable/angry_eyes");
-                setImage(mouthView, "@drawable/angry_mouth");
+                setImage(faceView, "@drawable/scream_face");
+                setImage(eyesView, "@drawable/eyes");
+                setImage(mouthView, "@drawable/scream_mouth");
                 break;
             case Sad:
                 setImage(faceView, "@drawable/sad_face");
