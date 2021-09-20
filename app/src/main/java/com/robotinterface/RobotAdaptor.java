@@ -238,7 +238,7 @@ public class RobotAdaptor extends AppCompatActivity {
         if (mqttHandler != null) {
             mqttHandler.sendMessage(msg, resources.getString(R.string.mqtt_command_topic));
         }
-        onLogEvent("Release Gripper");
+        onLogEvent("Shutdown");
     }
 
     public void dockToCharger() {
@@ -247,7 +247,7 @@ public class RobotAdaptor extends AppCompatActivity {
         if (mqttHandler != null) {
             mqttHandler.sendMessage(msg, resources.getString(R.string.mqtt_command_topic));
         }
-        onLogEvent("Release Gripper");
+        onLogEvent("Dock To Charger");
     }
 
     public void startSelfTest() {
@@ -256,6 +256,6 @@ public class RobotAdaptor extends AppCompatActivity {
         if (mqttHandler != null) {
             mqttHandler.sendMessage(msg, resources.getString(R.string.mqtt_command_topic));
         }
-        onLogEvent("Release Gripper");
+        onLogEvent("Start Self Test");
     }
 }
