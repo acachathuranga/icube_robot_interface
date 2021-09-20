@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     RobotAdaptor.RobotCallback callback;
     TextView console;
     String TAG = "Main";
+    boolean isDisabled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,17 +63,25 @@ public class MainActivity extends AppCompatActivity {
                     avatar.setMood(Avatar.MOOD.Happy);
                 }
 
+                if (status == RobotAdaptor.STATUS.Disabled) {
+                    isDisabled = true;
+                } else {
+                    isDisabled = false;
+                }
+
 
             }
 
             @Override
             public void onRobotObstacleDetectionCallback(RobotAdaptor.OBSTACLE_DETECTION state) {
                 MainActivity.this.onLogEvent("ObstacleDetection: " + state.name());
-                switch (state) {
-                    case Ok: avatar.setMood(Avatar.MOOD.Happy); break;
-                    case Warning: avatar.setMood(Avatar.MOOD.Nervous); break;
-                    case Critical: avatar.setMood(Avatar.MOOD.Sad); break;
-                    default: avatar.setMood(Avatar.MOOD.Angry); break;
+                if (isDisabled == false) {
+                    switch (state) {
+                        case Ok: avatar.setMood(Avatar.MOOD.Happy); break;
+                        case Warning: avatar.setMood(Avatar.MOOD.Nervous); break;
+                        case Critical: avatar.setMood(Avatar.MOOD.Sad); break;
+                        default: avatar.setMood(Avatar.MOOD.Angry); break;
+                    }
                 }
             }
         };
