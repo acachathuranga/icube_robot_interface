@@ -11,21 +11,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text='Please move the robot infront of the charger and press "Dock" button'
+        android:text='Please move the robot infront of the charger and press "Auto Mode" button'
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/dockMsg_textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="580dp"
+        android:layout_height="63dp"
         android:layout_marginBottom="20dp"
-        android:text="Start automatic docking, followed by Robot Self Test"
+        android:text='After pressing the "Auto Mode" button in joystick, touch the "Dock And Self Test" button to continue'
+        android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="16sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/dock_Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -40,11 +41,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="594dp"
+        android:layout_height="294dp"
+        android:scaleType="centerInside"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:srcCompat="@drawable/joystick_front" />
+
     <Button
         android:id="@+id/dock_Button"
         android:layout_width="356dp"
         android:layout_height="61dp"
-        android:layout_marginBottom="150dp"
         android:backgroundTint="#03A9F4"
         android:text="Dock And Self Test"
         android:textAllCaps="false"
@@ -57,7 +69,7 @@
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dockMsg_textView"
